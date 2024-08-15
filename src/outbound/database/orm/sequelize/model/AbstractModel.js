@@ -16,6 +16,7 @@ export default class AbstractModel extends Model {
                 sequelize: connection
             }
         );
+
         return connection.models[options.modelName];
     }
 }

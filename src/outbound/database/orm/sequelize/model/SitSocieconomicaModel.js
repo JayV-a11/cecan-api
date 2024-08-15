@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import AbstractModel from "./AbstractModel.js";
 import PacienteModel from "./PacienteModel.js";
 
-export default class EnderecoModel extends AbstractModel {
+export default class SitSocieconomicaModel extends AbstractModel {
   static init() {
     return super.init({
       attributes: {
@@ -17,32 +17,29 @@ export default class EnderecoModel extends AbstractModel {
           type: DataTypes.UUID,
           allowNull: false,
         },
-        cep: {
+        recebe_beneficio: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+        },
+        aposentado: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+        },
+        desempregado: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+        },
+        moradia: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+        },
+        apoio: {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        rua: {
+        renda_per_capita: {
           type: DataTypes.STRING,
           allowNull: false,
-        },
-        numero: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-        cidade: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-        bairro: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-        estado: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-        complemento: {
-          type: DataTypes.STRING,
         },
         createdAt: {
           type: DataTypes.DATE,
@@ -54,8 +51,8 @@ export default class EnderecoModel extends AbstractModel {
         },
       },
       options: {
-        modelName: "Endereco",
-        tableName: "Enderecos",
+        modelName: "SitSocieconomica",
+        tableName: "Sit_socieconomica",
         underscored: true,
       },
     });

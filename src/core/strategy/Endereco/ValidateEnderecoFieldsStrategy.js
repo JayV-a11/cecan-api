@@ -10,27 +10,25 @@ export default class ValidateEnderecoFieldsStrategy extends AbstractStrategy {
         this.result = result;
     }
 
-    async execute(address, result = this.result) {
-        if (!(address instanceof Endereco)) {
-            result.error.push('Entidade recebida não é um endereço!');
-        }
+    async execute(entity, result = this.result) {
+        const endereco = entity.endereco;
 
-        if (!address || !address.paciente_id || address.paciente_id.length === 0) {
+        if (!endereco || !endereco.paciente_id || endereco.paciente_id.length === 0) {
             result.error.push('O campo "paciente_id" é obrigatório!');
         }
-        if (!address.cep || address.cep.length === 0) {
+        if (!endereco.cep || endereco.cep.length === 0) {
             result.error.push('O campo "cep" é obrigatório!');
         }
-        if (!address.numero || address.numero.length === 0) {
+        if (!endereco.numero || endereco.numero.length === 0) {
             result.error.push('O campo "numero" é obrigatório!');
         }
-        if (!address.cidade || address.cidade.length === 0) {
+        if (!endereco.cidade || endereco.cidade.length === 0) {
             result.error.push('O campo "cidade" é obrigatório!');
         }
-        if (!address.bairro || address.bairro.length === 0) {
+        if (!endereco.bairro || endereco.bairro.length === 0) {
             result.error.push('O campo "bairro" é obrigatório!');
         }
-        if (!address.estado || address.estado.length === 0) {
+        if (!endereco.estado || endereco.estado.length === 0) {
             result.error.push('O campo "estado" é obrigatório!');
         }
 
@@ -39,7 +37,7 @@ export default class ValidateEnderecoFieldsStrategy extends AbstractStrategy {
         }
 
         return {
-            entity: address,
+            entity,
             result
         };
     }

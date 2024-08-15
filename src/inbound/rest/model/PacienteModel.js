@@ -1,29 +1,30 @@
-import AbstractModel from './AbstractModel.js';
+import AbstractModel from "./AbstractModel.js";
 
-export default class PacienteModel extends AbstractModel {
-    constructor ({
-        id = null,
-        rg = '',
-        cpf = '',
-        nascimento = '',
-        sus = '',
-        convenio = '',
-        estado_civil = '',
-        escolaridade = '',
-        outro_contato = '',
-        parentesco = '',
-    } = {}) {
-        super();
-        this.id = id;
-        this.rg = rg;
-        this.cpf = cpf;
-        this.nascimento = nascimento;
-        this.sus = sus;
-        this.convenio = convenio;
-        this.estado_civil = estado_civil;
-        this.escolaridade = escolaridade;
-        this.outro_contato = outro_contato;
-        this.parentesco = parentesco;
-    }
-
+export default class UserModel extends AbstractModel {
+  constructor({
+    id = null,
+    nome = "",
+    rg = "",
+    cpf = "",
+    nascimento = "",
+    sus = "",
+    convenio = false,
+    estado_civil = "",
+    escolaridade = "",
+    outro_contato = "",
+    parentesco = "",
+  } = {}) {
+    super();
+    id = this.id;
+    nome = this.nome;
+    rg = this.rg;
+    cpf = this.cpf;
+    nascimento = this.nascimento;
+    sus = this.sus;
+    convenio = this.convenio;
+    estado_civil = this.estado_civil;
+    escolaridade = this.escolaridade;
+    outro_contato = this.outro_contato;
+    parentesco = this.parentesco;
+  }
 }

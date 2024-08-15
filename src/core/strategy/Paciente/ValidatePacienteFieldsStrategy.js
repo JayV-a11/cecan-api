@@ -10,39 +10,37 @@ export default class ValidatePacienteFieldsStrategy extends AbstractStrategy {
         this.result = result;
     }
 
-    async execute(user, result = this.result) {
-        if (!(user instanceof Paciente)) {
-            result.error.push('Entidade recebida não é um paciente!');
-        }
+    async execute(entity, result = this.result) {
+        const paciente = entity.paciente;
 
-        if (!user || !user.nome || user.nome.length === 0) {
+        if (!paciente || !paciente.nome || paciente.nome.length === 0) {
             result.error.push('O campo "nome" é obrigatório!');
         }
-        if (!user.rg || user.rg.length === 0) {
+        if (!paciente.rg || paciente.rg.length === 0) {
             result.error.push('O campo "RG" é obrigatório!');
         }
-        if (!user.cpf || user.cpf.length === 0) {
+        if (!paciente.cpf || paciente.cpf.length === 0) {
             result.error.push('O campo "CPF" é obrigatório!');
         }
-        if (!user.nascimento || user.nascimento.length === 0) {
+        if (!paciente.nascimento || paciente.nascimento.length === 0) {
             result.error.push('O campo "nascimento" é obrigatório!');
         }
-        if (!user.sus || user.sus.length === 0) {
+        if (!paciente.sus || paciente.sus.length === 0) {
             result.error.push('O campo "número SUS" é obrigatório!');
         }
-        if (typeof user.convenio !== 'boolean') {
+        if (typeof paciente.convenio !== 'boolean') {
             result.error.push('O campo "convenio" é obrigatório e deve ser booleano!');
         }
-        if (!user.estado_civil || user.estado_civil.length === 0) {
+        if (!paciente.estado_civil || paciente.estado_civil.length === 0) {
             result.error.push('O campo "estado_civil" é obrigatório!');
         }
-        if (!user.escolaridade || user.escolaridade.length === 0) {
+        if (!paciente.escolaridade || paciente.escolaridade.length === 0) {
             result.error.push('O campo "escolaridade" é obrigatório!');
         }
-        if (!user.outro_contato || user.outro_contato.length === 0) {
+        if (!paciente.outro_contato || paciente.outro_contato.length === 0) {
             result.error.push('O campo "outro_contato" é obrigatório!');
         }
-        if (!user.parentesco || user.parentesco.length === 0) {
+        if (!paciente.parentesco || paciente.parentesco.length === 0) {
             result.error.push('O campo "parentesco" é obrigatório!');
         }
 
@@ -51,7 +49,7 @@ export default class ValidatePacienteFieldsStrategy extends AbstractStrategy {
         }
 
         return {
-            entity: user,
+            entity: entity,
             result
         };
     }

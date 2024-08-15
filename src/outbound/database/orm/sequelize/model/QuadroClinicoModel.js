@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import AbstractModel from "./AbstractModel.js";
 import PacienteModel from "./PacienteModel.js";
 
-export default class EnderecoModel extends AbstractModel {
+export default class QuadroClinicoModel extends AbstractModel {
   static init() {
     return super.init({
       attributes: {
@@ -17,32 +17,37 @@ export default class EnderecoModel extends AbstractModel {
           type: DataTypes.UUID,
           allowNull: false,
         },
-        cep: {
+        recidiva: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+        },
+        metastase: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+        },
+        realizou_cirurgia: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+        },
+        realiza_exames_prevencao: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+        },
+        realiza_tratamento_outras_doencas: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+        },
+        local_tratamento: {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        rua: {
+        medico_responsavel: {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        numero: {
-          type: DataTypes.STRING,
+        data_diagnostico: {
+          type: DataTypes.DATE,
           allowNull: false,
-        },
-        cidade: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-        bairro: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-        estado: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-        complemento: {
-          type: DataTypes.STRING,
         },
         createdAt: {
           type: DataTypes.DATE,
@@ -54,8 +59,8 @@ export default class EnderecoModel extends AbstractModel {
         },
       },
       options: {
-        modelName: "Endereco",
-        tableName: "Enderecos",
+        modelName: "QuadroClinico",
+        tableName: "Quadros_clinicos",
         underscored: true,
       },
     });

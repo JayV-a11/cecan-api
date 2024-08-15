@@ -1,8 +1,8 @@
-import Endereco from '../../../../../../core/domain/Endereco.js';
-import EnderecoModel from '../EnderecoModel.js';
+import QuadroClinico from '../../../../../../core/domain/QuadroClinico.js';
+import QuadroClinicoModel from '../QuadroClinicoModel.js';
 import AbstractMapper from './AbstractMapper.js';
 
-export default class EnderecoMapper extends AbstractMapper {
+export default class QuadroClinicoMapper extends AbstractMapper {
     constructor () {
         super();
         this.adapt = this.adapt.bind(this);
@@ -10,9 +10,9 @@ export default class EnderecoMapper extends AbstractMapper {
 
     adapt(object) {
         switch (object.constructor.name) {
-            case `${EnderecoModel.constructor.name}`:
+            case `${QuadroClinicoModel.constructor.name}`:
                 return this.adaptModelToEntity(object);
-            case `${Endereco.constructor.name}`:
+            case `${QuadroClinico.constructor.name}`:
                 return this.adaptEntityToModel(object);
             default:
                 return object;
@@ -20,7 +20,7 @@ export default class EnderecoMapper extends AbstractMapper {
     }
 
     adaptModelToEntity (model) {
-        const entity = new Endereco();
+        const entity = new QuadroClinico();
 
         const keys = Object.keys(model);
 
@@ -30,7 +30,7 @@ export default class EnderecoMapper extends AbstractMapper {
     }
 
     adaptEntityToModel (entity) {
-        const model = new EnderecoModel();
+        const model = new QuadroClinicoModel();
 
         const keys = Object.keys(entity);
 

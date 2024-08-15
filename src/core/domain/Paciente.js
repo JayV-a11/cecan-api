@@ -3,11 +3,12 @@ import AbstractEntity from "./AbstractEntity.js";
 export default class Paciente extends AbstractEntity {
   constructor({
     id = null,
+    nome = "",
     rg = "",
     cpf = "",
     nascimento = "",
     sus = "",
-    convenio = "",
+    convenio = false,
     estado_civil = "",
     escolaridade = "",
     outro_contato = "",
@@ -15,6 +16,7 @@ export default class Paciente extends AbstractEntity {
   } = {}) {
     super();
     this.id = id;
+    this.nome = nome;
     this.rg = rg;
     this.cpf = cpf;
     this.nascimento = nascimento;

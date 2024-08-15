@@ -8,7 +8,6 @@ export default class EnderecoRepository extends IEnderecoRepository {
 
   async save(endereco) {
     return await this.connection.create({
-        id: endereco.id,
         paciente_id: endereco.paciente_id,
         cep: endereco.cep,
         rua: endereco.rua,

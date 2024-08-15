@@ -1,22 +1,22 @@
 import AbstractStrategy from '../AbstractStrategy.js';
 import Result from '../../util/Result.js';
-import Endereco from '../../domain/Endereco.js';
-import EnderecoService from '../../../outbound/service/EnderecoService.js';
+import QuadroClinico from '../../domain/QuadroClinico.js';
+import QuadroClinicoService from '../../../outbound/service/QuadroClinicoService.js';
 
-export default class SaveEnderecoStrategy extends AbstractStrategy {
-    constructor ({
-        enderecoService = null,
+export default class SaveQuadroClinicoStrategy extends AbstractStrategy {
+    constructor({
+        quadroClinicoService = null,
         result = new Result()
     } = {}) {
         super();
         this.result = result;
-        this.enderecoService = new EnderecoService();
+        this.quadroClinicoService = new QuadroClinicoService();
     }
 
     async execute(entity, result = this.result) {
         try {
-            const endereco = new Endereco(entity.endereco);
-            const res = await this.enderecoService.createEndereco(endereco);
+            const quadroClinico = new QuadroClinico(entity.quadroClinico);
+            const res = await this.quadroClinicoService.createQuadroClinico(quadroClinico);
             result.status = 201;
             result.data = res;
         } catch (error) {

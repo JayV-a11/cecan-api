@@ -1,6 +1,5 @@
 import IPacienteService from "../../core/service/IPacienteService.js";
 import PacienteFilterMapper from "../database/orm/sequelize/filter/mapper/PacienteFilterMapper.js";
-import AuthFilterMapper from "../database/orm/sequelize/filter/mapper/AuthFilterMapper.js";
 import PacienteMapper from "../database/orm/sequelize/model/mapper/PacienteMapper.js";
 import PacienteRespository from "../database/orm/sequelize/repository/PacienteRespository.js";
 

@@ -1,6 +1,7 @@
 import AbstractStrategy from '../AbstractStrategy.js';
 import Result from '../../util/Result.js';
-import Endereco from '../../domain/Endereco.js';
+import Paciente from '../../domain/Paciente.js';
+import PacienteService from '../../../outbound/service/PacienteService.js';
 
 export default class SavePacienteStrategy extends AbstractStrategy {
     constructor ({
@@ -9,23 +10,25 @@ export default class SavePacienteStrategy extends AbstractStrategy {
     } = {}) {
         super();
         this.result = result;
-        this.pacienteService = pacienteService;
+        this.pacienteService = new PacienteService();
     }
 
-    async execute(paciente, result = this.result) {
+    async execute(entity, result = this.result) {
         try {
-            const endereco = new Endereco(paciente);
-            paciente = await this.pacienteService.createPaciente(paciente);
-            endereco.paciente_id = paciente.id;
+            const paciente = new Paciente(entity.paciente);
+            const res = await this.pacienteService.createPaciente(paciente);
+            entity.endereco.paciente_id =  res.dataValues.id;
+            entity.quadroClinico.paciente_id = res.dataValues.id;
+            entity.sitSocieconomica.paciente_id = res.dataValues.id;
             result.status = 201;
-            result.data = endereco;
+            result.data = res;
         } catch (error) {
             result.status = 500;
             result.error.push(error.message);
         }
 
         return {
-            entity: result.data,
+            entity: entity,
             result
         };
     }

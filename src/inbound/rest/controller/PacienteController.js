@@ -1,12 +1,10 @@
 import AbstractController from "./AbstractController.js";
 
-import PacienteModel from "../model/PacienteModel.js";
-
 import pacienteMapper from "../model/mapper/PacienteMapper.js";
 import CreatePacienteUseCase from "../../../core/useCase/Paciente/CreatePacienteUseCase.js";
 import PacienteService from "../../../outbound/service/PacienteService.js";
 
-export default class StockController extends AbstractController {
+export default class PacienteController extends AbstractController {
   constructor() {
     super();
     this.createPaciente = this.createPaciente.bind(this);
@@ -20,15 +18,11 @@ export default class StockController extends AbstractController {
   }
 
   async createPaciente(req, res, next) {
-    const pacienteModel = new PacienteModel(req.body);
-
-    const paciente = this.pacienteMapper.adapt(pacienteModel);
+    const paciente = req.body;
     const result = await this.createPacienteUseCase.createPaciente(paciente);
     const formattedResponseData = [];
 
-    for (const data of result.data) {
-      formattedResponseData.push(this.pacienteMapper.adapt(data));
-    }
+    formattedResponseData.push(this.pacienteMapper.adapt(result.data.dataValues));
 
     result.data = formattedResponseData;
     res.status(result.status);
