@@ -11,10 +11,11 @@ export default class GetPacientesStrategy extends AbstractStrategy {
         this.pacienteService = pacienteService;
     }
 
-    async execute(filter, result = this.result) {
+    async execute(entity, result = this.result) {
         try {
-            const pacientes = await this.pacienteService.findAllPacientes(filter);
+            const pacientes = await this.pacienteService.findAllPacientes(entity);
             result.data = pacientes;
+            entity = pacientes;
             result.status = (pacientes.length === 0) ? 204 : 200;
         } catch(error) {
             result.status = 500;
@@ -22,7 +23,7 @@ export default class GetPacientesStrategy extends AbstractStrategy {
         }
 
         return {
-            entity: filter,
+            entity: entity,
             result
         }
     }

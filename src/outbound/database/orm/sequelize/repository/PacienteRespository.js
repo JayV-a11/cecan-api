@@ -33,33 +33,33 @@ export default class PacienteRepository extends IPacienteRepository {
 
       if (filter.where) {
         for (const [key, value] of Object.entries(filter.where)) {
-          clauses.push(`c.${key} ILIKE '%${value}%'`);
+          clauses.push(`c.${key} ${typeof value === "boolean" ? '=' : 'ILIKE'} ${typeof value === "boolean" ? value : `'%${value}%'`}`);
         }
       }
 
       if (filter.custom) {
         if (filter.custom.Paciente) {
           for (const [key, value] of Object.entries(filter.custom.Paciente)) {
-            clauses.push(`p.${key} ILIKE '%${value}%'`);
+            clauses.push(`p.${key} ${typeof value === "boolean" ? '=' : 'ILIKE'} ${typeof value === "boolean" ? value : `'%${value}%'`}`);
           }
         }
         if (filter.custom.Endereco) {
           for (const [key, value] of Object.entries(filter.custom.Endereco)) {
-            clauses.push(`e.${key} ILIKE '%${value}%'`);
+            clauses.push(`e.${key} ${typeof value === "boolean" ? '=' : 'ILIKE'} ${typeof value === "boolean" ? value : `'%${value}%'`}`);
           }
         }
         if (filter.custom.QuadroClinico) {
           for (const [key, value] of Object.entries(
             filter.custom.QuadroClinico
           )) {
-            clauses.push(`qc.${key} ILIKE '%${value}%'`);
+            clauses.push(`qc.${key} ${typeof value === "boolean" ? '=' : 'ILIKE'} ${typeof value === "boolean" ? value : `'%${value}%'`}`);
           }
         }
         if (filter.custom.SitSocieconomica) {
           for (const [key, value] of Object.entries(
             filter.custom.SitSocieconomica
           )) {
-            clauses.push(`ss.${key} ILIKE '%${value}%'`);
+            clauses.push(`ss.${key} ${typeof value === "boolean" ? '=' : 'ILIKE'} ${typeof value === "boolean" ? value : `'%${value}%'`}`);
           }
         }
       }
