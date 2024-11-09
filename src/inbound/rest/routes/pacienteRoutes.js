@@ -4,12 +4,12 @@ import { ensureAuthenticated } from "../middleware/ensureAuthenticated.js";
 
 const router = express.Router();
 const middleware = (req, res, next) => {
-  next();
+  ensureAuthenticated(req, res, next);
 };
 
 router.use(middleware);
 
 router.post("/paciente", new PacienteController().createPaciente);
-
+router.get("/paciente", new PacienteController().getPacientes);
 
 export default router;

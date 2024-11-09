@@ -19,7 +19,6 @@ async createSitSocieconomica(sitSocieconomica) {
       aposentado: sitSocieconomica.aposentado,
       desempregado: sitSocieconomica.desempregado,
       moradia: sitSocieconomica.moradia,
-      apoio: sitSocieconomica.apoio,
       renda_per_capita: sitSocieconomica.renda_per_capita,
     });
     return this.sitSocieconomicaMapper.adapt(sitSocieconomicaModel);

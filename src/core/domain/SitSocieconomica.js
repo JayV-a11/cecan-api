@@ -7,8 +7,7 @@ export default class SitSocieconomica extends AbstractEntity {
         recebe_beneficio = false,
         aposentado = false,
         desempregado = false,
-        moradia = false,
-        apoio = "",
+        moradia = "",
         renda_per_capita = "",
     } = {}) {
         super();
@@ -18,7 +17,6 @@ export default class SitSocieconomica extends AbstractEntity {
         this.aposentado = aposentado;
         this.desempregado = desempregado;
         this.moradia = moradia;
-        this.apoio = apoio;
         this.renda_per_capita = renda_per_capita;
     }
 }

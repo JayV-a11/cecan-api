@@ -11,8 +11,8 @@ export default class Paciente extends AbstractEntity {
     convenio = false,
     estado_civil = "",
     escolaridade = "",
-    outro_contato = "",
-    parentesco = "",
+    contato = "",
+    codigo = null,
   } = {}) {
     super();
     this.id = id;
@@ -24,7 +24,7 @@ export default class Paciente extends AbstractEntity {
     this.convenio = convenio;
     this.estado_civil = estado_civil;
     this.escolaridade = escolaridade;
-    this.outro_contato = outro_contato;
-    this.parentesco = parentesco;
+    this.contato = contato;
+    this.codigo = codigo;
   }
 }

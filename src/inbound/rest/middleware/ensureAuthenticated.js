@@ -13,7 +13,7 @@ export function ensureAuthenticated(req, res, next) {
 
   try {
     jwt.verify(token, process.env.APP_SECRET);
-    return next();
+    return next(); 
   } catch (error) {
     return res.status(401).json({
       message: "Token inválido",

@@ -14,7 +14,6 @@ export default class SitSocieconomicaRepository extends ISitSocieconomicaReposit
         aposentado: sitSocieconomica.aposentado,
         desempregado: sitSocieconomica.desempregado,
         moradia: sitSocieconomica.moradia,
-        apoio: sitSocieconomica.apoio,
         renda_per_capita: sitSocieconomica.renda_per_capita,
     });
   }

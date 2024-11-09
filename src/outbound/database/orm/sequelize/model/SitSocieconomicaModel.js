@@ -30,10 +30,6 @@ export default class SitSocieconomicaModel extends AbstractModel {
           allowNull: false,
         },
         moradia: {
-          type: DataTypes.BOOLEAN,
-          allowNull: false,
-        },
-        apoio: {
           type: DataTypes.STRING,
           allowNull: false,
         },
@@ -55,13 +51,6 @@ export default class SitSocieconomicaModel extends AbstractModel {
         tableName: "Sit_socieconomica",
         underscored: true,
       },
-    });
-  }
-
-  static associate() {
-    this.belongsTo(PacienteModel, {
-      foreignKey: "paciente_id",
-      as: "paciente",
     });
   }
 }

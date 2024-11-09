@@ -5,7 +5,8 @@ export default class AbstractFilter {
         group = null,
         limit = null,
         search = null,
-        offset = 0
+        offset = 0,
+        custom = null,
     } = {}) {
         this.where = where;
         this.order = order;
@@ -13,6 +14,7 @@ export default class AbstractFilter {
         this.limit = limit;
         this.search = search;
         this.offset = offset;
+        this.custom = custom;
     }
 
     concat(validation) {
@@ -25,6 +27,9 @@ export default class AbstractFilter {
     mountFilter() {
         const filter = {};
         filter.where = this.where;
+        if(this.custom) {
+            filter.custom = this.custom;
+        }
 
         if (this.order && this.order.length > 0) {
             filter.order = [];

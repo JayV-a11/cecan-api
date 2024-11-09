@@ -1,42 +1,42 @@
 import AbstractFilter from '../../../../core/filter/AbstractFilter.js';
 
-export default class UserFilterMapper {
+export default class CadastroFilterMapper {
     constructor() {}
 
-    adapt(userFilter) {
+    adapt(cadastroFilter) {
         const filter = new AbstractFilter();
 
-        const filterKeys = Object.keys(userFilter.filter);
+        const filterKeys = Object.keys(cadastroFilter.filter);
 
         const fields = {};
 
         for (const key of filterKeys) {
             if(key === 'limit') {
-                filter.limit = userFilter.filter[key];
+                filter.limit = cadastroFilter.filter[key];
                 continue;
             }
             if(key === 'page') {
-                filter.page = userFilter.filter[key];
+                filter.page = cadastroFilter.filter[key];
                 continue;
             }
             if(key === 'group') {
-                filter.group = userFilter.filter[key].split(',');
+                filter.group = cadastroFilter.filter[key].split(',');
                 continue;
             }
             if(key === 'sort') {
-                filter.sort = userFilter.filter[key].split(',');
+                filter.sort = cadastroFilter.filter[key].split(',');
                 continue;
             }
             if(key === 'id') {
-                fields[key] = userFilter.filter[key];
+                fields[key] = cadastroFilter.filter[key];
                 continue;
             }
-            if(key === 'name') {
-                fields[key] = userFilter.filter[key];
+            if(key === 'nome_paciente') {
+                fields[key] = cadastroFilter.filter[key];
                 continue;
             }
-            if(key === 'login') {
-                fields[key] = userFilter.filter[key];
+            if(key === 'status') {
+                fields[key] = cadastroFilter.filter[key];
                 continue;
             }
         }

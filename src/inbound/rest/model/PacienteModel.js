@@ -1,6 +1,6 @@
 import AbstractModel from "./AbstractModel.js";
 
-export default class UserModel extends AbstractModel {
+export default class PacienteModel extends AbstractModel {
   constructor({
     id = null,
     nome = "",
@@ -11,8 +11,8 @@ export default class UserModel extends AbstractModel {
     convenio = false,
     estado_civil = "",
     escolaridade = "",
-    outro_contato = "",
-    parentesco = "",
+    contato = "",
+    codigo = null,
   } = {}) {
     super();
     id = this.id;
@@ -24,7 +24,7 @@ export default class UserModel extends AbstractModel {
     convenio = this.convenio;
     estado_civil = this.estado_civil;
     escolaridade = this.escolaridade;
-    outro_contato = this.outro_contato;
-    parentesco = this.parentesco;
+    contato = this.contato;
+    codigo = this.codigo;
   }
 }

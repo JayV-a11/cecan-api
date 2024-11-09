@@ -25,17 +25,20 @@ export default class PacienteService extends IPacienteService {
   }
 
   async findAllPacientes(filter) {
-    const userFilter = this.pacienteFilterMapper.adapt(filter);
-    filter = userFilter.mountFilter();
+    try {
+      const pacienteFilter = this.pacienteFilterMapper.adapt(filter);
+      filter = pacienteFilter.mountFilter();
+      const userModels = await this.pacienteRespository.findAll(filter);
 
-    const userModels = await this.pacienteRespository.findAll(filter);
+      const pacientes = [];
 
-    const users = [];
+      for (const userModel of userModels) {
+        pacientes.push(userModel);
+      }
 
-    for (const userModel of userModels) {
-      users.push(this.pacienteMapper.adapt(userModel));
+      return pacientes;
+    } catch (err) {
+      console.log(err, "erro");
     }
-
-    return users;
   }
 }

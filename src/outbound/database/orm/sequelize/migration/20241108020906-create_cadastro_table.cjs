@@ -1,36 +1,20 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.createTable("Sit_socieconomica", {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable("Cadastros", {
       id: {
         type: Sequelize.UUID,
         allowNull: false,
         autoIncrement: false,
         primaryKey: true,
       },
-      paciente_id: {
-        type: Sequelize.UUID,
-        allowNull: false,
-      },
-      recebe_beneficio: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-      },
-      aposentado: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-      },
-      desempregado: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-      },
-      moradia: {
+      nome_paciente: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      renda_per_capita: {
+      status: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -47,7 +31,7 @@ module.exports = {
     });
   },
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('Sit_socieconomica');
-  }
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable("Cadastros");
+  },
 };

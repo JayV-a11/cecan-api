@@ -1,8 +1,8 @@
-import Paciente from '../../../../core/domain/Paciente.js';
-import PacienteModel from '../PacienteModel.js';
+import Cadastro from '../../../../../../core/domain/Cadastro.js';
+import CadastroModel from '../CadastroModel.js';
 import AbstractMapper from './AbstractMapper.js';
 
-export default class PacienteMapper extends AbstractMapper {
+export default class CadastroMapper extends AbstractMapper {
     constructor () {
         super();
         this.adapt = this.adapt.bind(this);
@@ -10,9 +10,9 @@ export default class PacienteMapper extends AbstractMapper {
 
     adapt(object) {
         switch (object.constructor.name) {
-            case `${PacienteModel.constructor.name}`:
+            case `${CadastroModel.constructor.name}`:
                 return this.adaptModelToEntity(object);
-            case `${Paciente.constructor.name}`:
+            case `${Cadastro.constructor.name}`:
                 return this.adaptEntityToModel(object);
             default:
                 return object;
@@ -20,7 +20,7 @@ export default class PacienteMapper extends AbstractMapper {
     }
 
     adaptModelToEntity (model) {
-        const entity = new Paciente();
+        const entity = new Cadastro();
 
         const keys = Object.keys(model);
 
@@ -30,7 +30,7 @@ export default class PacienteMapper extends AbstractMapper {
     }
 
     adaptEntityToModel (entity) {
-        const model = new PacienteModel();
+        const model = new CadastroModel();
 
         const keys = Object.keys(entity);
 

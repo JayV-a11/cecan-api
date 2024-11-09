@@ -1,23 +1,25 @@
+import { Sequelize } from "sequelize";
 import IPacienteRepository from "../../../../../core/repository/IPacienteRepository.js";
+import CadastroModel from "../model/CadastroModel.js";
 import PacienteModel from "../model/PacienteModel.js";
-
 export default class PacienteRepository extends IPacienteRepository {
   constructor() {
     super(PacienteModel.init());
+    this.sequelize = PacienteModel.sequelize;
   }
 
   async save(paciente) {
     return await this.connection.create({
-        nome: paciente.nome,
-        rg: paciente.rg,
-        cpf: paciente.cpf,
-        nascimento: paciente.nascimento,
-        sus: paciente.sus,
-        convenio: paciente.convenio,
-        estado_civil: paciente.estado_civil,
-        escolaridade: paciente.escolaridade,
-        outro_contato: paciente.outro_contato,
-        parentesco: paciente.parentesco
+      nome: paciente.nome,
+      rg: paciente.rg,
+      cpf: paciente.cpf,
+      nascimento: paciente.nascimento,
+      sus: paciente.sus,
+      convenio: paciente.convenio,
+      estado_civil: paciente.estado_civil,
+      escolaridade: paciente.escolaridade,
+      contato: paciente.contato,
+      codigo: paciente.codigo,
     });
   }
 
@@ -25,7 +27,59 @@ export default class PacienteRepository extends IPacienteRepository {
     return await this.connection.findOne(filter);
   }
 
-  async findAll(filter) {
-    return await this.connection.findAll(filter)
+  async findAll(defaultFilter) {
+    const buildWhereClause = (filter) => {
+      const clauses = [];
+
+      if (filter.where) {
+        for (const [key, value] of Object.entries(filter.where)) {
+          clauses.push(`c.${key} ILIKE '%${value}%'`);
+        }
+      }
+
+      if (filter.custom) {
+        if (filter.custom.Paciente) {
+          for (const [key, value] of Object.entries(filter.custom.Paciente)) {
+            clauses.push(`p.${key} ILIKE '%${value}%'`);
+          }
+        }
+        if (filter.custom.Endereco) {
+          for (const [key, value] of Object.entries(filter.custom.Endereco)) {
+            clauses.push(`e.${key} ILIKE '%${value}%'`);
+          }
+        }
+        if (filter.custom.QuadroClinico) {
+          for (const [key, value] of Object.entries(
+            filter.custom.QuadroClinico
+          )) {
+            clauses.push(`qc.${key} ILIKE '%${value}%'`);
+          }
+        }
+        if (filter.custom.SitSocieconomica) {
+          for (const [key, value] of Object.entries(
+            filter.custom.SitSocieconomica
+          )) {
+            clauses.push(`ss.${key} ILIKE '%${value}%'`);
+          }
+        }
+      }
+
+      return clauses.length ? `WHERE ${clauses.join(" AND ")}` : "";
+    };
+
+    const whereClause = buildWhereClause(defaultFilter);
+    const query = `
+    SELECT c.*, p.*, e.*, qc.*, ss.*
+    FROM "Cadastros" AS c
+    LEFT JOIN "Pacientes" AS p ON p.codigo = c.id
+    LEFT JOIN "Enderecos" AS e ON e.paciente_id = p.id
+    LEFT JOIN "Quadros_clinicos" AS qc ON qc.paciente_id = p.id
+    LEFT JOIN "Sit_socieconomica" AS ss ON ss.paciente_id = p.id
+    ${whereClause}
+    LIMIT ${defaultFilter.limit || 5};
+  `;
+
+    const [result] = await this.sequelize.query(query);
+    return result;
   }
 }

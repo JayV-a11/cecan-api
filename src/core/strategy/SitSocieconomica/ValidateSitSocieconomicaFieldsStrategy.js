@@ -25,12 +25,10 @@ export default class ValidateSitSocieconomicaFieldsStrategy extends AbstractStra
         if (typeof sitSocieconomica.desempregado !== 'boolean') {
             result.error.push('O campo "desempregado" é obrigatório e deve ser booleano!');
         }
-        if (typeof sitSocieconomica.moradia !== 'boolean') {
+        if (typeof sitSocieconomica.moradia !== 'string') {
             result.error.push('O campo "moradia" é obrigatório e deve ser booleano!');
         }
-        if (!sitSocieconomica.apoio || sitSocieconomica.apoio.length === 0) {
-            result.error.push('O campo "apoio" é obrigatório!');
-        }
+    
         if (!sitSocieconomica.renda_per_capita || sitSocieconomica.renda_per_capita.length === 0) {
             result.error.push('O campo "renda_per_capita" é obrigatório!');
         }

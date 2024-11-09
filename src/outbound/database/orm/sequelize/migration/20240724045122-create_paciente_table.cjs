@@ -43,12 +43,12 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      outro_contato: {
+      contato: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      parentesco: {
-        type: Sequelize.STRING,
+      codigo: {
+        type: Sequelize.UUID,
         allowNull: false,
       },
       created_at: {

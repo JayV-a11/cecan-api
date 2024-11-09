@@ -65,11 +65,4 @@ export default class QuadroClinicoModel extends AbstractModel {
       },
     });
   }
-
-  static associate() {
-    this.belongsTo(PacienteModel, {
-      foreignKey: "paciente_id",
-      as: "paciente",
-    });
-  }
 }

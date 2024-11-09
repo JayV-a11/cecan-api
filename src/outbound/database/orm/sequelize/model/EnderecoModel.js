@@ -60,11 +60,4 @@ export default class EnderecoModel extends AbstractModel {
       },
     });
   }
-
-  static associate() {
-    this.belongsTo(PacienteModel, {
-      foreignKey: "paciente_id",
-      as: "paciente",
-    });
-  }
 }

@@ -37,13 +37,10 @@ export default class ValidatePacienteFieldsStrategy extends AbstractStrategy {
         if (!paciente.escolaridade || paciente.escolaridade.length === 0) {
             result.error.push('O campo "escolaridade" é obrigatório!');
         }
-        if (!paciente.outro_contato || paciente.outro_contato.length === 0) {
-            result.error.push('O campo "outro_contato" é obrigatório!');
+        if (!paciente.contato || paciente.contato.length === 0) {
+            result.error.push('O campo "contato" é obrigatório!');
         }
-        if (!paciente.parentesco || paciente.parentesco.length === 0) {
-            result.error.push('O campo "parentesco" é obrigatório!');
-        }
-
+        
         if (result.error.length > 0) {
             result.status = 406;
         }
