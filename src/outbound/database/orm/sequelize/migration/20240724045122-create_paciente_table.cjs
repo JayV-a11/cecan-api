@@ -31,9 +31,8 @@ module.exports = {
         allowNull: false,
       },
       convenio: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: false,
       },
       estado_civil: {
         type: Sequelize.STRING,
