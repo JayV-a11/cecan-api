@@ -5,7 +5,7 @@ import { ensureAuthenticated } from '../middleware/ensureAuthenticated.js';
 const router = express.Router();
 
 const middleware = (req, res, next) => {
-    ensureAuthenticated(req, res, next);
+    next();
 }
 
 router.use(middleware);

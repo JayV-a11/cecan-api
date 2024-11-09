@@ -32,8 +32,8 @@ class RouterController {
     this.express.use(`/`, example);
     this.express.use(`/`, publicCadastroRoutes);
     this.express.use(`/`, filesRoutes);
-    this.express.use(`/`, authRoutes);
     this.express.use(`/`, userRoutes);
+    this.express.use(`/`, authRoutes);
     this.express.use(`/`, pacienteRoutes);
     this.express.use(`/`, cadastrosRoutes);
   }
