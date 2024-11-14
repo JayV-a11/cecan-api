@@ -9,7 +9,6 @@ const middleware = (req, res, next) => {
 
 router.use(middleware);
 
-router.post("/paciente", new PacienteController().createPaciente);
 router.get("/paciente", new PacienteController().getPacientes);
 
 export default router;
