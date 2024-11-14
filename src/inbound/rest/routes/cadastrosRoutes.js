@@ -9,7 +9,6 @@ const middleware = (req, res, next) => {
 
 router.use(middleware);
 
-router.post("/cadastro", new CadastrosController().createCadastro);
 router.patch("/cadastro", new CadastrosController().updateCadastroStatus);
 router.get("/cadastro/all", new CadastrosController().getCadastros);
 
