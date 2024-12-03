@@ -23,6 +23,7 @@ export default class GenerateXLSXStrategy extends AbstractStrategy {
 
       // Configurando colunas
       worksheet.columns = [
+        { header: "Código", key: "codigo", width: 50 },
         { header: "Status", key: "status", width: 15 },
         { header: "Criado em", key: "created_at", width: 15 },
         { header: "Atualizado em", key: "updated_at", width: 15 },
@@ -36,13 +37,12 @@ export default class GenerateXLSXStrategy extends AbstractStrategy {
         { header: "Contato", key: "contato", width: 15 },
         { header: "Nome Completo", key: "nome", width: 25 },
         { header: "Convênio", key: "convenio", width: 10 },
-        { header: "Código", key: "codigo", width: 20 },
         { header: "CEP", key: "cep", width: 10 },
         { header: "Número", key: "numero", width: 10 },
         { header: "Cidade", key: "cidade", width: 15 },
         { header: "Bairro", key: "bairro", width: 15 },
         { header: "Estado", key: "estado", width: 10 },
-        { header: "Rua", key: "rua", width: 25 },
+        { header: "Rua", key: "rua", width: 30 },
         { header: "Complemento", key: "complemento", width: 15 },
         { header: "Recidiva", key: "recidiva", width: 10 },
         { header: "Metástase", key: "metastase", width: 10 },
@@ -62,27 +62,27 @@ export default class GenerateXLSXStrategy extends AbstractStrategy {
       // Adicionando linhas
       data.forEach((user) => {
         worksheet.addRow({
+          codigo: user.codigo  ?? '-',
           status: user.status,
           created_at: formatDate(user.created_at),
           updated_at: formatDate(user.updated_at),
-          nome_paciente: user.nome_paciente,
-          rg: user.rg,
-          cpf: user.cpf,
+          nome_paciente: user.nome_paciente ?? '-',
+          rg: user.rg ?? '-',
+          cpf: user.cpf ?? '-',
           nascimento: formatDate(user.nascimento),
-          sus: user.sus,
-          estado_civil: user.estado_civil,
-          escolaridade: user.escolaridade,
-          contato: user.contato,
-          nome: user.nome,
+          sus: user.sus ?? '-',
+          estado_civil: user.estado_civil ?? '-',
+          escolaridade: user.escolaridade ?? '-',
+          contato: user.contato ?? '-',
+          nome: user.nome ?? '-',
           convenio: formatBoolean(user.convenio === "true"),
-          codigo: user.codigo,
-          cep: user.cep,
-          numero: user.numero,
-          cidade: user.cidade,
-          bairro: user.bairro,
-          estado: user.estado,
-          rua: user.rua,
-          complemento: user.complemento,
+          cep: user.cep  ?? '-',
+          numero: user.numero  ?? '-',
+          cidade: user.cidade  ?? '-',
+          bairro: user.bairro  ?? '-',
+          estado: user.estado  ?? '-',
+          rua: user.rua  ?? '-',
+          complemento: user.complemento  ?? '-',
           recidiva: formatBoolean(user.recidiva),
           metastase: formatBoolean(user.metastase),
           realizou_cirurgia: formatBoolean(user.realizou_cirurgia),
@@ -90,14 +90,14 @@ export default class GenerateXLSXStrategy extends AbstractStrategy {
           realiza_tratamento_outras_doencas: formatBoolean(
             user.realiza_tratamento_outras_doencas
           ),
-          local_tratamento: user.local_tratamento,
-          medico_responsavel: user.medico_responsavel,
+          local_tratamento: user.local_tratamento  ?? '-',
+          medico_responsavel: user.medico_responsavel  ?? '-',
           data_diagnostico: formatDate(user.data_diagnostico),
           recebe_beneficio: formatBoolean(user.recebe_beneficio),
           aposentado: formatBoolean(user.aposentado),
           desempregado: formatBoolean(user.desempregado),
-          moradia: user.moradia,
-          renda_per_capita: user.renda_per_capita,
+          moradia: user.moradia  ?? '-',
+          renda_per_capita: user.renda_per_capita  ?? '-',
         });
       });
 
@@ -122,9 +122,7 @@ export default class GenerateXLSXStrategy extends AbstractStrategy {
       worksheet.eachRow((row, rowNumber) => {
         row.eachCell((cell) => {
           cell.border = {
-            top: { style: "thin" },
             left: { style: "thin" },
-            bottom: { style: "thin" },
             right: { style: "thin" },
           };
           cell.alignment = { vertical: "middle", horizontal: "left" };
