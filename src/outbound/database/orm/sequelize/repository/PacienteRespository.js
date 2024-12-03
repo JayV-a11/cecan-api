@@ -41,7 +41,7 @@ export default class PacienteRepository extends IPacienteRepository {
         if (filter.custom.Paciente) {
           for (const [key, value] of Object.entries(filter.custom.Paciente)) {
             if(key === 'codigo') {
-              clauses.push(`p.${key} '='  '${value}'`);
+              clauses.push(`p.${key} = '${value}'`);
             } else
             clauses.push(`p.${key} ${typeof value === "boolean" ? '=' : 'ILIKE'} ${typeof value === "boolean" ? value : `'%${value}%'`}`);
           }
