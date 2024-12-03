@@ -72,7 +72,13 @@ export default class PacienteRepository extends IPacienteRepository {
 
     const whereClause = buildWhereClause(defaultFilter);
     const query = `
-    SELECT c.*, p.*, e.*, qc.*, ss.*
+SELECT 
+  c.*, 
+  p.*, 
+  e.*, 
+  qc.*, 
+  ss.*, 
+  COUNT(*) OVER() AS total_rows
     FROM "Cadastros" AS c
     LEFT JOIN "Pacientes" AS p ON p.codigo = c.id
     LEFT JOIN "Enderecos" AS e ON e.paciente_id = p.id
