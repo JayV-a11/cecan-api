@@ -140,7 +140,7 @@ export default class GenerateXLSXStrategy extends AbstractStrategy {
           theme: "TableStyleMedium9",
           showRowStripes: true,
         },
-        columns: worksheet.columns.map((col) => ({ name: col.header })),
+        columns: worksheet.columns.map((col) => ({ name: col.header, filterButton: true })),
         rows: worksheet.getRows(2, lastRow - 1).map((row) => row.values.slice(1)),
       });
 
