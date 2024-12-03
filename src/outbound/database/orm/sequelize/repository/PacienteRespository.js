@@ -76,7 +76,7 @@ export default class PacienteRepository extends IPacienteRepository {
     LEFT JOIN "Quadros_clinicos" AS qc ON qc.paciente_id = p.id
     LEFT JOIN "Sit_socieconomica" AS ss ON ss.paciente_id = p.id
     ${whereClause}
-    LIMIT ${defaultFilter.limit || 5};
+    LIMIT ${defaultFilter.limit || 9999};
   `;
 
     const [result] = await this.sequelize.query(query);
