@@ -129,6 +129,21 @@ export default class GenerateXLSXStrategy extends AbstractStrategy {
         });
       });
 
+      const headerCount = worksheet.columns.length;
+      const lastRow = worksheet.rowCount;
+
+      worksheet.addTable({
+        name: "TabelaPacientes",
+        ref: `A1:${String.fromCharCode(64 + headerCount)}${lastRow}`,
+        headerRow: true,
+        style: {
+          theme: "TableStyleMedium9",
+          showRowStripes: true,
+        },
+        columns: worksheet.columns.map((col) => ({ name: col.header })),
+        rows: worksheet.getRows(2, lastRow - 1).map((row) => row.values.slice(1)),
+      });
+
       result.data = workbook;
       result.status = 201;
     } catch (error) {
