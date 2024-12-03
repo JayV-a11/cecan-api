@@ -13,6 +13,8 @@ export default class ValidatePacienteFieldsStrategy extends AbstractStrategy {
     async execute(entity, result = this.result) {
         const paciente = entity.paciente;
 
+        console.log(entity);
+
         if (!paciente || !paciente.nome || paciente.nome.length === 0) {
             result.error.push('O campo "nome" é obrigatório!');
         }
