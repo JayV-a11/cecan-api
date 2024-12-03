@@ -1,6 +1,7 @@
 import AbstractStrategy from "../AbstractStrategy.js";
 import Result from "../../util/Result.js";
 import excelJS from "exceljs";
+
 export default class GenerateXLSXStrategy extends AbstractStrategy {
   constructor({ result = new Result(), pacienteService = null } = {}) {
     super();
@@ -16,9 +17,11 @@ export default class GenerateXLSXStrategy extends AbstractStrategy {
       };
 
       const formatBoolean = (value) => (value ? "Sim" : "Não");
-      
+
       const workbook = new excelJS.Workbook();
       const worksheet = workbook.addWorksheet("Pacientes");
+
+      // Configurando colunas
       worksheet.columns = [
         { header: "Status", key: "status", width: 15 },
         { header: "Criado em", key: "created_at", width: 15 },
@@ -44,16 +47,8 @@ export default class GenerateXLSXStrategy extends AbstractStrategy {
         { header: "Recidiva", key: "recidiva", width: 10 },
         { header: "Metástase", key: "metastase", width: 10 },
         { header: "Realizou Cirurgia", key: "realizou_cirurgia", width: 15 },
-        {
-          header: "Exames de Prevenção",
-          key: "realiza_exames_prevencao",
-          width: 18,
-        },
-        {
-          header: "Tratamento Outras Doenças",
-          key: "realiza_tratamento_outras_doencas",
-          width: 25,
-        },
+        { header: "Exames de Prevenção", key: "realiza_exames_prevencao", width: 18 },
+        { header: "Tratamento Outras Doenças", key: "realiza_tratamento_outras_doencas", width: 25 },
         { header: "Local do Tratamento", key: "local_tratamento", width: 20 },
         { header: "Médico Responsável", key: "medico_responsavel", width: 20 },
         { header: "Data do Diagnóstico", key: "data_diagnostico", width: 15 },
@@ -64,6 +59,7 @@ export default class GenerateXLSXStrategy extends AbstractStrategy {
         { header: "Renda per Capita", key: "renda_per_capita", width: 15 },
       ];
 
+      // Adicionando linhas
       data.forEach((user) => {
         worksheet.addRow({
           status: user.status,
@@ -90,9 +86,7 @@ export default class GenerateXLSXStrategy extends AbstractStrategy {
           recidiva: formatBoolean(user.recidiva),
           metastase: formatBoolean(user.metastase),
           realizou_cirurgia: formatBoolean(user.realizou_cirurgia),
-          realiza_exames_prevencao: formatBoolean(
-            user.realiza_exames_prevencao
-          ),
+          realiza_exames_prevencao: formatBoolean(user.realiza_exames_prevencao),
           realiza_tratamento_outras_doencas: formatBoolean(
             user.realiza_tratamento_outras_doencas
           ),
@@ -107,10 +101,35 @@ export default class GenerateXLSXStrategy extends AbstractStrategy {
         });
       });
 
+      // Estilizando cabeçalho
       worksheet.getRow(1).eachCell((cell) => {
-        cell.font = { bold: true };
+        cell.font = { bold: true, color: { argb: "FFFFFFFF" } };
+        cell.fill = {
+          type: "pattern",
+          pattern: "solid",
+          fgColor: { argb: "FF4F81BD" },
+        };
+        cell.border = {
+          top: { style: "thin" },
+          left: { style: "thin" },
+          bottom: { style: "thin" },
+          right: { style: "thin" },
+        };
+        cell.alignment = { vertical: "middle", horizontal: "center" };
       });
 
+      // Estilizando células
+      worksheet.eachRow((row, rowNumber) => {
+        row.eachCell((cell) => {
+          cell.border = {
+            top: { style: "thin" },
+            left: { style: "thin" },
+            bottom: { style: "thin" },
+            right: { style: "thin" },
+          };
+          cell.alignment = { vertical: "middle", horizontal: "left" };
+        });
+      });
 
       result.data = workbook;
       result.status = 201;
