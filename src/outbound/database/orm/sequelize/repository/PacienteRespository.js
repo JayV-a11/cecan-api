@@ -82,4 +82,17 @@ export default class PacienteRepository extends IPacienteRepository {
     const [result] = await this.sequelize.query(query);
     return result;
   }
+
+  async remove(paciente_id) {
+    const Quadroquery = `DELETE FROM "Quadros_clinicos" WHERE paciente_id = ${paciente_id};`;
+    const Endquery = `DELETE FROM "Enderecos" WHERE paciente_id = ${paciente_id};`;
+    const Sitquery = `DELETE FROM "Sit_socieconomica" WHERE paciente_id = ${paciente_id};`;
+    const Pacquery = `DELETE FROM "Pacientes" WHERE id = ${paciente_id};`;
+
+    await this.sequelize.query(Quadroquery);
+    await this.sequelize.query(Endquery);
+    await this.sequelize.query(Sitquery);
+    await this.sequelize.query(Pacquery);
+    return true;
+  }
 }

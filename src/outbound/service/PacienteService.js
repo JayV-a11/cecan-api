@@ -9,36 +9,42 @@ export default class PacienteService extends IPacienteService {
     this.createPaciente = this.createPaciente.bind(this);
     this.updatePaciente = this.updatePaciente.bind(this);
     this.findAllPacientes = this.findAllPacientes.bind(this);
+    this.removePaciente = this.removePaciente.bind(this);
     this.pacienteRespository = new PacienteRespository();
     this.pacienteMapper = new PacienteMapper();
     this.pacienteFilterMapper = new PacienteFilterMapper();
   }
 
-  async createPaciente(user) {
-    const userModel = await this.pacienteRespository.save(user);
-    return this.pacienteMapper.adapt(userModel);
+  async createPaciente(paciente) {
+    const pacienteModel = await this.pacienteRespository.save(paciente);
+    return this.pacienteMapper.adapt(pacienteModel);
   }
 
-  async updatePaciente(user) {
-    const userModel = await this.pacienteRespository.update(user);
-    return this.pacienteMapper.adapt(userModel);
+  async updatePaciente(paciente) {
+    const pacienteModel = await this.pacienteRespository.update(paciente);
+    return this.pacienteMapper.adapt(pacienteModel);
   }
 
   async findAllPacientes(filter) {
     try {
       const pacienteFilter = this.pacienteFilterMapper.adapt(filter);
       filter = pacienteFilter.mountFilter();
-      const userModels = await this.pacienteRespository.findAll(filter);
+      const pacienteModels = await this.pacienteRespository.findAll(filter);
 
       const pacientes = [];
 
-      for (const userModel of userModels) {
-        pacientes.push(userModel);
+      for (const pacienteModel of pacienteModels) {
+        pacientes.push(pacienteModel);
       }
 
       return pacientes;
     } catch (err) {
       console.log(err, "erro");
     }
+  }
+
+  async removePaciente(paciente_id) {
+    const pacienteModel = await this.pacienteRespository.remove(paciente_id);
+    return this.pacienteMapper.adapt(pacienteModel);
   }
 }

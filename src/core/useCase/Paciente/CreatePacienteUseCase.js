@@ -11,10 +11,8 @@ import SavePacienteStrategy from '../../strategy/Paciente/SavePacienteStrategy.j
 import SaveEnderecoStrategy from '../../strategy/Endereco/SaveEnderecoStrategy.js';
 import SaveQuadroClinicoStrategy from '../../strategy/QuadroClinico/SaveQuadroClinicoStrategy.js';
 import SaveSitSocieconomicaStrategy from '../../strategy/SitSocieconomica/SaveSitSocieconomicaStrategy.js';
+import RemoveInvalidPacienteInfoStrategy from '../../strategy/Paciente/RemoveInvalidPacienteInfoStrategy.js';
 
-import EnderecoService from '../../../outbound/service/EnderecoService.js'
-import QuadroClinicoService from '../../../outbound/service/QuadroClinicoService.js'
-import SitSocieconomicaService from '../../../outbound/service/SitSocieconomicaService.js'
 export default class CreatePacienteUseCase extends AbstractUseCase {
     constructor({
         service = null
@@ -43,6 +41,10 @@ export default class CreatePacienteUseCase extends AbstractUseCase {
     }
 
     async createPaciente(entity) {
-        return await this.executeStrategies(entity, new Result());
+        const ret = await this.executeStrategies(entity, new Result());
+        if (ret.error && ret.error.length > 0) {
+            new RemoveInvalidPacienteInfoStrategy().execute(ret.entity, ret.result);
+        }
+        return ret
     }
 }
